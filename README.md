@@ -140,7 +140,7 @@ Container(
             // Button to show the widget in a bottom sheet
             ElevatedButton(
               onPressed: () {
-                WidgetSnippet.bottomSheet(
+                WidgetSnippet.showBottomSheet(
                   context: context,
                   widget: myCustomWidget,
                   sourceCode: sourceCode,
@@ -151,7 +151,7 @@ Container(
             // Button to show the widget in a dialog
             ElevatedButton(
               onPressed: () {
-                WidgetSnippet.popup(
+                WidgetSnippet.showPopup(
                   context: context,
                   widget: myCustomWidget,
                   sourceCode: sourceCode,
@@ -184,13 +184,13 @@ Widget Snippet provides multiple ways to display your widgets:
 
 - `WidgetSnippet()`: Renders the widget and its code directly within the current UI (inline display)
 - `WidgetSnippet.showModal()`: Automatically chooses between popup dialog or bottom sheet based on screen size
-- `WidgetSnippet.bottomSheet()`: Shows a bottom sheet containing the widget preview, code snippet, and action buttons
-- `WidgetSnippet.popup()`: Displays the widget and code in a popup dialog
+- `WidgetSnippet.showBottomSheet()`: Shows a bottom sheet containing the widget preview, code snippet, and action buttons
+- `WidgetSnippet.showPopup()`: Displays the widget and code in a popup dialog
 - `WidgetSnippet.showFullScreen()`: Navigates to a full-screen page displaying the widget and its code
 
 ## Customization
 
-You can customize the appearance and behavior of your widget snippets using the `SnippetConfig` class:
+You can customize the appearance and behavior of your widget snippets using the `WidgetSnippetConfig` class:
 
 <?code-excerpt "doc_examples/customization_example.dart (build)"?>
 
@@ -198,7 +198,7 @@ You can customize the appearance and behavior of your widget snippets using the 
 WidgetSnippet(
   widget: myCustomWidget,
   sourceCode: sourceCode,
-  config: SnippetConfig(
+  config: WidgetSnippetConfig(
     // The title to display for the widget preview and file name
     title: 'Customization Example',
 
@@ -236,7 +236,7 @@ You can create terminal-style code viewers with customizable appearance:
 WidgetSnippet(
   widget: myCustomWidget,
   sourceCode: sourceCode,
-  config: SnippetConfig(
+  config: WidgetSnippetConfig(
     terminalStyle: const TerminalStyle(
       title: 'Flutter Terminal',
       brightness: Brightness.dark,
