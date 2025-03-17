@@ -7,7 +7,7 @@ class WidgetSnippetConfig {
   /// Creates a new widget snippet configuration.
   WidgetSnippetConfig({
     this.title = 'Widget Snippet',
-    this.displayMode = DisplayMode.column,
+    this.displayMode,
     this.spacing = 16,
     this.maxLines,
     this.terminalStyle,
@@ -17,7 +17,7 @@ class WidgetSnippetConfig {
   final String title;
 
   /// How to display the widget and code.
-  final DisplayMode displayMode;
+  final DisplayMode? displayMode;
 
   /// Maximum number of lines to display in the code view.
   /// If null, all lines are displayed.

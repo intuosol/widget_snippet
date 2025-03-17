@@ -26,7 +26,7 @@ class InlineSnippet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (config.displayMode) {
+    switch (config.displayMode ?? DisplayMode.column) {
       case DisplayMode.row:
         return Row(
           spacing: config.spacing,
@@ -38,12 +38,16 @@ class InlineSnippet extends StatelessWidget {
         );
       case DisplayMode.column:
         return Column(
+          mainAxisSize: MainAxisSize.min,
           spacing: config.spacing,
-          children: <Widget>[_buildWidgetPreview(), _buildCodeView(context)],
+          children: <Widget>[
+            _buildWidgetPreview(),
+            Flexible(child: _buildCodeView(context)),
+          ],
         );
       case DisplayMode.tabbed:
         return TabbedViewSnippet(
-          widgetPreview: _buildWidgetPreview(),
+          widgetPreview: widget == null ? null : _buildWidgetPreview(),
           codeView: _buildCodeView(context),
         );
     }

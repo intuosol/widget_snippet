@@ -1,3 +1,10 @@
+## 0.1.1
+
+- Fixed the download zip file function to download just the code file if no widget is provided.
+- Fixed issue with the default DisplayMode not being auto-assigned if `WidgetSnippetConfig` is provided without `displayMode`.
+- Removed the Widget Preview tab from the `DisplayMode.tabbed` mode if no widget is provided.
+- Fixed `DisplayMode.tabbed` breaking when displayed in the BottomSheet.
+
 ## 0.1.0
 
 - First public release of the Widget Snippet package

@@ -28,6 +28,8 @@ class WidgetSnippet extends StatelessWidget {
   /// The [widget] parameter is the actual Flutter widget to display.
   /// The [sourceCode] parameter is the string representation of the widget's code.
   /// The [config] parameter allows customization of the display options.
+  ///
+  /// [config.displayMode] defaults to [DisplayMode.column].
   const WidgetSnippet({super.key, this.sourceCode, this.widget, this.config});
 
   /// The widget to display in the preview.
@@ -42,14 +44,17 @@ class WidgetSnippet extends StatelessWidget {
   /// Displays a modal containing the widget preview, code snippet,
   /// and action buttons based on the screen size.
   ///
-  /// This method automatically chooses between popup and bottom sheet
-  /// based on the screen width, providing a responsive experience.
+  /// This method displays a popup dialog if the screen width is greater
+  /// than 600px, or a bottom sheet if the screen width is less than 600px.
   ///
   /// Parameters:
   /// * [context] - The build context
   /// * [sourceCode] - The source code to display
   /// * [widget] - Optional widget to preview
   /// * [config] - Optional configuration for the snippet
+  ///
+  /// [config.displayMode] dynamically changes based on the screen width and
+  /// whether a [widget] is provided.
   static Future<void> showModal({
     required BuildContext context,
     required String sourceCode,
@@ -122,21 +127,19 @@ class WidgetSnippet extends StatelessWidget {
   /// * [sourceCode] - The source code to display
   /// * [widget] - Optional widget to preview
   /// * [config] - Optional configuration for the snippet
+  ///
+  /// [config.displayMode] defaults to [DisplayMode.column] when no [widget] is provided.
+  /// [config.displayMode] defaults to [DisplayMode.row] when [widget] is provided and the screen width is greater than 800px.
+  /// [config.displayMode] defaults to [DisplayMode.tabbed] when [widget] is provided and the screen width is less than 800px.
   static Future<void> showPopup({
     required BuildContext context,
     required String sourceCode,
     Widget? widget,
     WidgetSnippetConfig? config,
   }) async {
-    // Choose a display mode based on the available space and content
-    config ??= WidgetSnippetConfig(
-      displayMode:
-          widget == null
-              ? DisplayMode.column
-              : MediaQuery.of(context).size.width > 800
-              ? DisplayMode.row
-              : DisplayMode.tabbed,
-    );
+    // If no config is provided, create a default one with tabbed mode
+    config ??= WidgetSnippetConfig();
+    DisplayMode? displayMode = config.displayMode;
 
     return showDialog<void>(
       context: context,
@@ -144,7 +147,15 @@ class WidgetSnippet extends StatelessWidget {
         return PopupSnippet(
           widget: widget,
           sourceCode: sourceCode,
-          config: config!,
+          config: config!.copyWith(
+            displayMode:
+                displayMode ??=
+                    widget == null
+                        ? DisplayMode.column
+                        : MediaQuery.of(context).size.width > 800
+                        ? DisplayMode.row
+                        : DisplayMode.tabbed,
+          ),
         );
       },
     );
@@ -160,13 +171,16 @@ class WidgetSnippet extends StatelessWidget {
   /// * [widget] - The widget to preview
   /// * [sourceCode] - The source code to display
   /// * [config] - Optional configuration for the snippet
+  ///
+  /// [config.displayMode] defaults to [DisplayMode.tabbed].
   static Future<Object> showFullScreen({
     required BuildContext context,
-    required Widget widget,
     required String sourceCode,
+    Widget? widget,
     WidgetSnippetConfig? config,
   }) async {
-    config ??= WidgetSnippetConfig(displayMode: DisplayMode.tabbed);
+    config ??= WidgetSnippetConfig();
+    DisplayMode? displayMode = config.displayMode;
 
     return Navigator.push(
       context,
@@ -175,7 +189,13 @@ class WidgetSnippet extends StatelessWidget {
             (BuildContext context) => FullScreenSnippet(
               widget: widget,
               sourceCode: sourceCode,
-              config: config!,
+              config: config!.copyWith(
+                displayMode:
+                    displayMode ??=
+                        widget == null
+                            ? DisplayMode.column
+                            : DisplayMode.tabbed,
+              ),
             ),
       ),
     );

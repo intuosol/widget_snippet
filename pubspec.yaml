@@ -1,6 +1,6 @@
 name: widget_snippet
 description: "A Flutter package for showcasing widget code snippets. Display, copy, and download widget previews with their source code in various presentation formats."
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/intuosol/widget_snippet
 repository: https://github.com/intuosol/widget_snippet
 issue_tracker: https://github.com/intuosol/widget_snippet/issues

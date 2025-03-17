@@ -14,7 +14,7 @@ class TabbedViewSnippet extends StatelessWidget {
   });
 
   /// The widget preview to display in the first tab.
-  final Widget widgetPreview;
+  final Widget? widgetPreview;
 
   /// The code view to display in the second tab.
   final Widget codeView;
@@ -22,14 +22,14 @@ class TabbedViewSnippet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: widgetPreview == null ? 1 : 2,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           TabBar(
-            tabs: const <Widget>[
-              Tab(text: 'Widget Preview'),
-              Tab(text: 'Source Code'),
+            tabs: <Widget>[
+              if (widgetPreview != null) const Tab(text: 'Widget Preview'),
+              const Tab(text: 'Source Code'),
             ],
             labelColor: Theme.of(context).colorScheme.primary,
             indicatorSize: TabBarIndicatorSize.tab,
@@ -37,10 +37,11 @@ class TabbedViewSnippet extends StatelessWidget {
           Flexible(
             child: TabBarView(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: widgetPreview,
-                ),
+                if (widgetPreview != null)
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: widgetPreview,
+                  ),
                 Padding(padding: const EdgeInsets.all(16.0), child: codeView),
               ],
             ),

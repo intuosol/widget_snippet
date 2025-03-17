@@ -19,9 +19,9 @@ Try it out in the [demo app](https://intuosol.github.io/widget_snippet/).
 
 ## Features
 
-- **Widget Preview + Code Viewer**: Show the widget alongside its source code
+- **Widget Preview + Source Code Viewer**: Show the widget alongside its source code
 - **Multiple Display Options**: Present code snippets in various formats to suit different use cases (e.g., row, column, tabbed)
-- **Terminal Style Code View**: Display code snippets in a realistic terminal interface
+- **Terminal Style Code View**: Display code snippets in a terminal window
 - **Easy Export**: Download widgets as images, copy code snippets, or export both as a zip file
 - **Customizable Appearance**: Style the presentation based on your app's theme
 
@@ -34,25 +34,6 @@ Try it out in the [demo app](https://intuosol.github.io/widget_snippet/).
 ```dart
 import 'package:flutter/material.dart';
 import 'package:widget_snippet/widget_snippet.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Widget Snippet Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -187,11 +168,23 @@ Container(
 
 Widget Snippet provides multiple ways to display your widgets:
 
-- `WidgetSnippet()`: Renders the widget and its code directly within the current UI (inline display)
-- `WidgetSnippet.showModal()`: Automatically chooses between popup dialog or bottom sheet based on screen size
-- `WidgetSnippet.showBottomSheet()`: Shows a bottom sheet containing the widget preview, code snippet, and action buttons
-- `WidgetSnippet.showPopup()`: Displays the widget and code in a popup dialog
+- `WidgetSnippet()`: Renders the widget and its code inline
+
+- `WidgetSnippet.showModal()`: Calls `showPopup()` if the screen width is greater than 600px, otherwise `showBottomSheet()`
+
+- `WidgetSnippet.showBottomSheet()`: Shows a bottom sheet containing the widget preview, code snippet, and download zip button.
+
+  - `DisplayMode` defaults to `DisplayMode.column`.
+
+- `WidgetSnippet.showPopup()`: Shows a centered dialog containing the widget preview, code snippet, and download zip button.
+
+  - `DisplayMode` defaults to `DisplayMode.row` if the screen width is greater than 800px, otherwise `DisplayMode.tabbed`.
+
 - `WidgetSnippet.showFullScreen()`: Navigates to a full-screen page displaying the widget and its code
+
+  - `DisplayMode` defaults to `DisplayMode.tabbed` if a widget is provided, otherwise `DisplayMode.column`.
+
+**The default display mode can be overridden by setting the `displayMode` property in the `WidgetSnippetConfig`.**
 
 ## Customization
 

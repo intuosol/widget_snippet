@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntuoSolApp(
+      title: 'Widget Snippet Demo',
       home: const WidgetSnippetDemo(),
       themeMode: ThemeMode.light,
     );
@@ -39,7 +40,7 @@ class WidgetSnippetDemo extends StatelessWidget {
         context: context,
         packageName: 'widget_snippet',
         description:
-            'A Flutter package that enables developers to easily showcase and share code snippets of their widgets.',
+            'A Flutter package for showcasing widget code snippets. Display, copy, and download widget previews with their source code in various presentation formats..',
       ),
     );
   }

@@ -41,19 +41,16 @@ class WebDownloader {
     required void Function({required String message, bool isError}) showMessage,
   }) async {
     try {
-      if (widgetAsBytes == null) {
-        showMessage(message: 'Failed to download', isError: true);
-        return;
-      }
-
       // Create a zip with both the image and code
       final Archive archive = Archive();
 
       // Add the image file
-      const String imagePath = 'widget-preview.png';
-      archive.addFile(
-        ArchiveFile(imagePath, widgetAsBytes.length, widgetAsBytes),
-      );
+      if (widgetAsBytes != null) {
+        const String imagePath = 'widget-preview.png';
+        archive.addFile(
+          ArchiveFile(imagePath, widgetAsBytes.length, widgetAsBytes),
+        );
+      }
 
       // Add the code file
       final Uint8List codeBytes = Uint8List.fromList(sourceCode.codeUnits);

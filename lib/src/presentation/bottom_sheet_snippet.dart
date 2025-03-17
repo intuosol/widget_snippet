@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/widget_snippet_config.dart';
+import '../../widget_snippet.dart';
 import '../widgets/download_zip_button.dart';
 import '../widgets/modal_title.dart';
 import 'inline_snippet.dart';
@@ -38,18 +38,27 @@ class BottomSheetSnippet extends StatelessWidget {
             ),
           ],
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: InlineSnippet(
-                widget: widget,
-                sourceCode: sourceCode,
-                config: config,
+        if (config.displayMode == DisplayMode.tabbed)
+          Flexible(
+            child: InlineSnippet(
+              widget: widget,
+              sourceCode: sourceCode,
+              config: config,
+            ),
+          )
+        else
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: InlineSnippet(
+                  widget: widget,
+                  sourceCode: sourceCode,
+                  config: config,
+                ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

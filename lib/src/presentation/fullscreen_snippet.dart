@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/widget_snippet_config.dart';
+import '../../widget_snippet.dart';
 import 'inline_snippet.dart';
 
 /// A full-screen page that displays a widget preview and its code.
@@ -27,16 +27,16 @@ class FullScreenSnippet extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(config.title)),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: InlineSnippet(
-                widget: widget,
-                sourceCode: sourceCode,
-                config: config,
-              ),
-            ),
-          ],
+        child: Padding(
+          padding:
+              config.displayMode == DisplayMode.tabbed
+                  ? EdgeInsets.zero
+                  : const EdgeInsets.all(8.0),
+          child: InlineSnippet(
+            widget: widget,
+            sourceCode: sourceCode,
+            config: config,
+          ),
         ),
       ),
     );

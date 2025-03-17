@@ -1,4 +1,3 @@
-// #docregion
 import 'package:flutter/material.dart';
 import 'package:widget_snippet/widget_snippet.dart';
 
@@ -19,6 +18,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// #docregion
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
