@@ -12,6 +12,11 @@
 
 A Flutter package for showcasing widget code snippets. Display, copy, and download widget previews with their source code in various presentation formats.
 
+Try it out in the [demo app](https://intuosol.github.io/widget_snippet/).
+
+| <img src="./showcase/bottom_sheet.png" width="250"> | <img src="./showcase/code_view_terminal.png" width="250"> | <img src="./showcase/popup_dialog.png" width="250"> |
+| :-------------------------------------------------: | :-------------------------------------------------------: | :-------------------------------------------------: |
+
 ## Features
 
 - **Widget Preview + Code Viewer**: Show the widget alongside its source code

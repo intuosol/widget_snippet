@@ -5,6 +5,23 @@ homepage: https://github.com/intuosol/widget_snippet
 repository: https://github.com/intuosol/widget_snippet
 issue_tracker: https://github.com/intuosol/widget_snippet/issues
 
+topics:
+  - ui
+  - documentation
+  - code-snippet
+  - showcase
+
+example:
+  path: example
+
+screenshots:
+  - description: Popup Dialog Example
+    path: showcase/popup_dialog.png
+  - description: Bottom Sheet Example
+    path: showcase/bottom_sheet.png
+  - description: Code Viewer Example
+    path: showcase/code_view_terminal.png
+
 environment:
   sdk: ^3.7.0
   flutter: ">=1.17.0"
